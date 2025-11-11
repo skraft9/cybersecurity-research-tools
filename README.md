@@ -3,6 +3,14 @@
 _⚠️For research and authorized testing only. Please do not use against systems without permission._
 
 ---
+## Popular Tools
+
+[CodeQL](https://github.com/github/codeql-cli-binaries/releases/)
+
+[Semgrep](https://github.com/semgrep/semgrep)
+
+---
+## Custom Scripts
 
 `recon.sh` requires subfinder & httpx-toolkit.
 
