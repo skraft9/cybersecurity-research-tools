@@ -12,25 +12,38 @@ _⚠️For research and authorized testing only. Please do not use against syste
 ---
 ## Custom Scripts
 
-`recon.sh` requires subfinder & httpx-toolkit.
+`recon.sh` 
 
-`ffuf_recon.sh` requires wordlists.  update headers with your username.
+Requirements
+* subfinder
+* httpx-toolkit
+
+`ffuf_recon.sh` 
+
+* Requires wordlists
+* Update headers with your bug bounty username (optional).
 
 ---
 
-- Use any text editor to create a new file (using nano for this example)
+- Use nano text editor to create a new file 
 
-`nano recon.sh`
+```bash
+nano recon.sh
+```
 
 -  Paste in the contents of the script from `recon.sh`
 
 -  Assign the file executable rights
 
-`sudo chmod +x`
+```bash
+sudo chmod +x
+```
 
 -  Execute bash script
 
-`./recon.sh`
+```bash
+./recon.sh
+```
 
 -  Enter the target domain
 
