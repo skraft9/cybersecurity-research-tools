@@ -10,7 +10,7 @@ _⚠️For research and authorized testing only. Please do not use against syste
 [Semgrep](https://github.com/semgrep/semgrep)
 
 ---
-## Custom Scripts
+## Custom Scripts For Bug Bounty
 
 `recon.sh` 
 
