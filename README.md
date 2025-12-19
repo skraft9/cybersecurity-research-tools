@@ -1,6 +1,6 @@
 # Tools for Cybersecurity Research
 
-_⚠️For research and authorized testing only. Please do not use against systems without permission._
+_⚠️Research and authorized testing only. Please do not use against systems without permission._
 
 ---
 ## Popular Tools
