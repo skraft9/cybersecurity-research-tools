@@ -7,7 +7,7 @@ _⚠️For research and authorized testing only. Please do not use against syste
 
 [CodeQL](https://github.com/github/codeql-cli-binaries/releases/) — Useful for heavyweight source code analysis, turn code into a database, write advanced queries to hunt for dangerous code patterns.
 
-[Semgrep](https://github.com/semgrep/semgrep) — Useful for lightweight source code analysis, hunt for dangerous code patterns quickly.
+[Semgrep](https://github.com/semgrep/semgrep) — Useful for lightweight source code analysis, quickly hunt for dangerous code patterns.
 
 [XSSHunter](https://github.com/trufflesecurity/xsshunter) — Useful for Blind XSS Confirmation.
 
