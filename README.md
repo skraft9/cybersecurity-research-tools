@@ -5,11 +5,13 @@ _⚠️For research and authorized testing only. Please do not use against syste
 ---
 ## Popular Tools
 
-[CodeQL](https://github.com/github/codeql-cli-binaries/releases/)
+[CodeQL](https://github.com/github/codeql-cli-binaries/releases/) — Useful for heavyweight source code analysis, turn code into a database, write advanced queries to hunt for dangerous code patterns.
 
-[Semgrep](https://github.com/semgrep/semgrep)
+[Semgrep](https://github.com/semgrep/semgrep) — Useful for lightweight source code analysis, hunt for dangerous code patterns quickly.
 
-[XSSHunter](https://github.com/trufflesecurity/xsshunter)
+[XSSHunter](https://github.com/trufflesecurity/xsshunter) — Useful for Blind XSS Confirmation.
+
+[Dalfox](https://github.com/hahwul/dalfox) — Useful for Automated XSS Hunting.
 
 ---
 ## Custom Scripts For Bug Bounty
