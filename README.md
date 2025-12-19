@@ -13,6 +13,8 @@ _⚠️For research and authorized testing only. Please do not use against syste
 
 [Dalfox](https://github.com/hahwul/dalfox) — Useful for Automated XSS Hunting.
 
+[Caido](https://github.com/caido/caido) — Advanced Web Application Security Tool, similar to Burp Suite.
+
 ---
 ## Custom Scripts For Bug Bounty
 
