@@ -18,18 +18,20 @@ _⚠️For research and authorized testing only. Please do not use against syste
 ---
 ## My Custom Scripts For Bug Bounty
 
-`recon.sh` 
+[`recon.sh`](https://github.com/skraft9/cybersecurity-research-tools/blob/main/recon.sh) 
 
 Requirements
 * subfinder
 * httpx-toolkit
 
-`ffuf_recon.sh` 
+[`ffuf_recon.sh`](https://github.com/skraft9/cybersecurity-research-tools/blob/main/ffuf_recon.sh) 
 
 * Requires wordlists
 * Update headers with your bug bounty username (optional).
 
 ---
+
+## Setup
 
 - Use nano text editor to create a new file 
 
