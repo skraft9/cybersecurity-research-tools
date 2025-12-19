@@ -55,6 +55,6 @@ sudo chmod +x
 
 -  Enter the target domain
 
-Review the responses from the web servers.
+- Review the responses from the web servers.
 
 > Note: `httpx-toolkit` is configured to follow re-directs.
