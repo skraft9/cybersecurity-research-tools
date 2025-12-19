@@ -16,7 +16,7 @@ _⚠️For research and authorized testing only. Please do not use against syste
 [Caido](https://github.com/caido/caido) — Advanced Web Application Security Tool, similar to Burp Suite.
 
 ---
-## Custom Scripts For Bug Bounty
+## My Custom Scripts For Bug Bounty
 
 `recon.sh` 
 
