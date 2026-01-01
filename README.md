@@ -27,7 +27,7 @@ A collection of personal reference guides for vulnerability research, N-day anal
 
 ---
 
-## 🛠️ My Custom Scripts
+## 🛠️ Custom Scripts
 Automation scripts for Bug Bounty reconnaissance and fuzzing.
 
 ### 1. [`recon.sh`](my_custom_scripts/recon.sh)
