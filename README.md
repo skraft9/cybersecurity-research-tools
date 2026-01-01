@@ -50,7 +50,7 @@ chmod +x my_custom_scripts/*.sh
 
 ## 🌍 Popular External Tools
 
-Industry-standard tools I use for deep-dive analysis.
+Industry tools for vulnerability research.
 
 * **[CodeQL](https://github.com/github/codeql-cli-binaries/releases/)** — Heavyweight source code analysis. Turns code into a queryable database to hunt for complex patterns.
 * **[Semgrep](https://github.com/semgrep/semgrep)** — Lightweight static analysis. Excellent for quickly "grepping" for dangerous function calls across large codebases.
