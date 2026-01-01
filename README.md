@@ -1,6 +1,15 @@
-# Tools for Cybersecurity Research
-
 _⚠️ Research and authorized testing only. Please do not use against systems without permission._
+
+---
+
+## 🌍 Popular Tools For Vulnerability Research
+
+
+* **[CodeQL](https://github.com/github/codeql-cli-binaries/releases/)** — Heavyweight source code analysis. Turns code into a queryable database to hunt for complex patterns.
+* **[Semgrep](https://github.com/semgrep/semgrep)** — Lightweight static analysis. Excellent for quickly "grepping" for dangerous function calls across large codebases.
+* **[Caido](https://github.com/caido/caido)** — Modern, lightweight web proxy (alternative to Burp Suite).
+* **[Dalfox](https://github.com/hahwul/dalfox)** — Powerful automated XSS scanner.
+* **[XSSHunter](https://github.com/trufflesecurity/xsshunter)** — Essential for catching Blind XSS callbacks.
 
 ---
 
@@ -43,20 +52,5 @@ chmod +x my_custom_scripts/*.sh
 
 # 3. Run a script
 ./my_custom_scripts/recon.sh
-
-```
-
----
-
-## 🌍 Popular Tools For Vulnerability Research
-
-
-* **[CodeQL](https://github.com/github/codeql-cli-binaries/releases/)** — Heavyweight source code analysis. Turns code into a queryable database to hunt for complex patterns.
-* **[Semgrep](https://github.com/semgrep/semgrep)** — Lightweight static analysis. Excellent for quickly "grepping" for dangerous function calls across large codebases.
-* **[Caido](https://github.com/caido/caido)** — Modern, lightweight web proxy (alternative to Burp Suite).
-* **[Dalfox](https://github.com/hahwul/dalfox)** — Powerful automated XSS scanner.
-* **[XSSHunter](https://github.com/trufflesecurity/xsshunter)** — Essential for catching Blind XSS callbacks.
-
-```
 
 ```
