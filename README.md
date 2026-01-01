@@ -1,4 +1,4 @@
-_⚠️ Research and authorized testing only. Please do not use against systems without permission._
+_⚠️ **Ethical Warning:** Research and authorized testing purposes only. Please do not use against systems without permission._
 
 ---
 
